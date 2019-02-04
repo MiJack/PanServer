@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456yuan
+    url: jdbc:mysql://localhost:3306/pan-server?useSSL=false&allowPublicKeyRetrieval=true
+application:
+  img:
+    default-avatar:
+      baseUrl: http://localhost:8080
+      path: /imgs/avatar.png
+  root:
+    username: root
+    password: root
+    email: root@localhost
