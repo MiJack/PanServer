@@ -24,8 +24,14 @@
 <body>
 用户主页
 
+
+<ul>
+    <li>
+        <a href="/admin/user.html">添加用户</a>
+    </li>
+</ul>
 <div sec:authorize="isAuthenticated()">
-    <a href="/login.html">已登录</a>
+    已登录<br/>
     <!--/*@thymesVar id="user" type="com.mijack.panserver.model.User"*/-->
 
     <span th:text="${user}"></span>

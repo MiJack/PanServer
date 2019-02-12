@@ -69,6 +69,14 @@ public interface UserRoleRepository {
      * @param role
      */
     @Insert("INSERT INTO user_role(user_id, role_name, role_status)" +
-            " VALUES (#{user.id},#{role.name},1)")
+            " VALUES (#{user.id},#{role.name},0)")
     void insertUserRole(@Param("user") User user, @Param("role") Role role);
+
+    /**
+     * 删除用户
+     *
+     * @param user
+     */
+    @Delete("delete from user_role where user_id = #{user.id}")
+    void deleteUserRole(@Param("user") User user);
 }

@@ -17,6 +17,7 @@
 package com.mijack.panserver.service;
 
 import com.mijack.panserver.model.Role;
+import com.mijack.panserver.model.TokenStatus;
 
 import java.util.Set;
 
@@ -36,4 +37,47 @@ public interface TokenService {
      * @return 生成的权限
      */
     String generateRestfulToken(long userId, long requestTimeMillis, long expireTimeMillis, Set<Role> authorities);
+
+    /**
+     * 将token进行解密
+     *
+     * @param token
+     * @return
+     */
+    long[] decodeToken(String token);
+
+    /**
+     * 为分块上传的文件创建token
+     *
+     * @param userId
+     * @param storageUnitId
+     * @param fileName
+     * @param fileLength
+     * @param chunkCount
+     * @param fileDigest
+     * @param requestTimeMillis
+     * @param expireTimeMillis
+     * @return
+     */
+    String generateChunkUploadToken(long userId, long storageUnitId, String fileName, long fileLength, long chunkCount, String fileDigest, long requestTimeMillis, long expireTimeMillis);
+
+    /**
+     * 生成邀请注册的token
+     *
+     * @param invitationUserId
+     * @param email
+     * @param requestTimeMillis
+     * @param expireTimeMillis
+     * @return
+     */
+    String generateInvitationToken(long invitationUserId, String email, long requestTimeMillis, long expireTimeMillis);
+
+    /**
+     * 检查invitationToken状态
+     *
+     * @param invitationToken
+     * @param email
+     * @return
+     */
+    TokenStatus validateInvitationToken(String invitationToken, String email);
 }

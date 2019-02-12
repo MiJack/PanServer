@@ -25,6 +25,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
@@ -50,6 +52,7 @@ public interface UserRepository {
      */
     @Select("select id,username,user_password,avatar_url,email,user_status from user_info where username=#{username}")
     @Results({
+            @Result(property = "id", column = "id", jdbcType = JdbcType.BIGINT, javaType = long.class),
             @Result(property = "password", column = "user_password"),
             @Result(property = "avatarUrl", column = "avatar_url"),
 //            @Result(property = "enabled",column = "user_status"),
@@ -57,6 +60,22 @@ public interface UserRepository {
                     many = @Many(select = "com.mijack.panserver.dao.UserRoleRepository.listUserRoles"))
     })
     User findUserByUsername(@Param("username") String username);
+
+    /**
+     * 根据邮箱查询用户信息
+     *
+     * @param email 邮箱
+     * @return
+     */
+    @Select("select id,username,user_password,avatar_url,email,user_status from user_info where email=#{email}")
+    @Results({
+            @Result(property = "password", column = "user_password"),
+            @Result(property = "avatarUrl", column = "avatar_url"),
+//            @Result(property = "enabled",column = "user_status"),
+            @Result(property = "authorities", column = "id", javaType = Set.class,
+                    many = @Many(select = "com.mijack.panserver.dao.UserRoleRepository.listUserRoles"))
+    })
+    User findUserByEmail(@Param("email") String email);
 
     /**
      * 根据用户id查询用户信息
@@ -86,7 +105,26 @@ public interface UserRepository {
      * @param user
      */
     @Insert("INSERT INTO user_info(username, user_password, avatar_url, email,user_status)" +
-            " VALUES (#{user.username},#{user.password},#{user.avatarUrl},#{user.email},1)")
+            " VALUES (#{user.username},#{user.password},#{user.avatarUrl},#{user.email},0)")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     void insertUser(@Param("user") User user);
+
+    /**
+     * 启用用户
+     *
+     * @param user
+     */
+
+    @Update(" UPDATE user_info " +
+            " set  user_status  = 1 " +
+            " where id = #{user.id} ")
+    void enableUser(@Param("user") User user);
+
+    /**
+     * 删除用户
+     *
+     * @param user
+     */
+    @Delete("delete from user_info where id = #{user.id}")
+    void deleteUser(@Param("user") User user);
 }

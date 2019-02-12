@@ -34,8 +34,17 @@ public class WebInitEvent extends ApplicationEvent {
     }
 
     public enum WebStatus {
+        /**
+         * 网站未初始化完毕
+         */
         UNINITIALIZED,
+        /**
+         * 网站初始化完毕
+         */
         INITIALIZED,
+        /**
+         * 网站初始化失败
+         */
         INITIALIZATION_FAILED;
     }
 }

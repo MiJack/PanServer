@@ -40,7 +40,6 @@ import java.util.Map;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String REMEMBER_ME_PARAMETER = "remember-me";
 
-
     @Autowired
     JdbcTemplate jdbcTemplate;
     @Autowired

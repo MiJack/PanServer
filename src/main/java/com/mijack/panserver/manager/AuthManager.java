@@ -22,8 +22,21 @@ import com.mijack.panserver.model.User;
  * @author Mi&Jack
  */
 public interface AuthManager {
+    /**
+     * 根据restful token 查找对应的用户
+     *
+     * @param token
+     * @return
+     */
     User findUserByToken(String token);
 
+    /**
+     * 保存restful token
+     * @param userId
+     * @param requestTimeMillis
+     * @param expireTimeMillis
+     * @param restfulToken
+     */
     void saveRestfulToken(long userId, long requestTimeMillis, long expireTimeMillis, String restfulToken);
 
 }

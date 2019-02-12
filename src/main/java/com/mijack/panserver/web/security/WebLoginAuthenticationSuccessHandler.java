@@ -16,8 +16,10 @@
 
 package com.mijack.panserver.web.security;
 
+import com.mijack.panserver.model.Role;
 import com.mijack.panserver.model.User;
 import com.mijack.panserver.service.AuthService;
+import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
@@ -31,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * @author Mi&Jack
@@ -61,7 +64,8 @@ public class WebLoginAuthenticationSuccessHandler extends
 
         User user = AuthenticationUtils.currentUser();
         Assert.notNull(user, "user == null");
-        String restfulToken = authService.createRestfulToken(user.getId(), System.currentTimeMillis(), user.getAuthorities());
+        Set<Role> authorities = user.getAuthorities();
+        String restfulToken = authService.createRestfulToken(user.getId(), System.currentTimeMillis(), authorities);
         response.addCookie(new Cookie("restfulToken", restfulToken));
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
 

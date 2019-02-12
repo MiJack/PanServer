@@ -29,3 +29,17 @@ CREATE TABLE IF NOT EXISTS restful_token
   restful_token       VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'restful请求的token',
   token_status        TINYINT(3)  NOT NULL DEFAULT 1 COMMENT 'ENABLE(1), DISABLE(2), EXPIRED(3)'
 ) COMMENT  ='restful token 表';
+
+
+# id, email, token, operator, invite_time, expire_time, status
+
+CREATE TABLE IF NOT EXISTS user_invitation
+(
+  id                 BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '主键',
+  email              VARCHAR(255) NOT NULL DEFAULT '' COMMENT '被邀请的邮箱',
+  invitation_token   VARCHAR(255) NOT NULL DEFAULT '' COMMENT '邀请token',
+  operator           INT                   DEFAULT - 1 NOT NULL COMMENT '邀请方id',
+  invite_time_millis TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  expire_time_millis TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '失效时间',
+  token_status       TINYINT(3)   NOT NULL DEFAULT 1 COMMENT 'ENABLE(1), DISABLE(2), EXPIRED(3)'
+) COMMENT ='用户邀请表';

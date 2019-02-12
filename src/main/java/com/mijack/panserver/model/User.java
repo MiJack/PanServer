@@ -118,10 +118,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public void setAuthorities(Set<Role> authorities) {
-        this.authorities = authorities;
-    }
-
     public void setAccountNonExpired(boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }

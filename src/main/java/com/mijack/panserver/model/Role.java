@@ -17,11 +17,14 @@
 package com.mijack.panserver.model;
 
 import com.mijack.panserver.model.util.IdentifierEnum;
+import com.mijack.panserver.mybatis.handlers.EnumData;
+import com.mijack.panserver.mybatis.handlers.ValueType;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @author Mi&Jack
  */
+@EnumData(valueType = ValueType.NAME)
 public enum Role implements GrantedAuthority, IdentifierEnum {
     /**
      * 超级管理员

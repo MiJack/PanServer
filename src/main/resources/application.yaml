@@ -4,12 +4,39 @@ spring:
     username: root
     password: 123456yuan
     url: jdbc:mysql://localhost:3306/pan-server?useSSL=false&allowPublicKeyRetrieval=true
+  data:
+    mongodb:
+      database: pan-server
+      grid-fs-database: pan-server-fs
+      host: 127.0.0.1
+      port: 27017
+  mail:
+    host: smtp.163.com
+    username: 15757116236@163.com # 邮箱登录账号
+    password: 123456qwerty  # 邮箱登录密码
+mail:
+  fromMail:
+    addr: 15757116236@163.com
+
+mybatis:
+  type-handlers-package: com.mijack.panserver.mybatis
+  configuration:
+    default-enum-type-handler: com.mijack.panserver.mybatis.handlers.EnumTypeHandler
 application:
   img:
     default-avatar:
       baseUrl: http://localhost:8080
       path: /imgs/avatar.png
+  user-manager:
+    default-password: 1234546
   root:
     username: root
     password: root
     email: root@localhost
+  website:
+    host: http://127.0.0.1:8080
+  file-upload:
+    # 分桶上传的最大大小,256k
+    chunk-size-limit: 262144
+    # GridFS分桶上传的最大大小,256k
+    gridfs-chunk-size: 262144

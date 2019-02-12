@@ -21,7 +21,16 @@ package com.mijack.panserver.model.util;
  */
 
 public interface IdentifierEnum {
+    /**
+     * 可枚举对象的ID
+     *
+     * @return
+     */
     int id();
 
+    /**
+     * 可枚举对象的名称
+     * @return
+     */
     String name();
 }

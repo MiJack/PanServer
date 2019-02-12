@@ -39,21 +39,71 @@ public interface UserService extends UserDetailsService {
     void deleteAllUser();
 
     /**
-     * 创建相应权限的用户
+     * 创建相应权限的用户，默认关闭状态
      *
-     * @param rootName 用户名
+     * @param userName 用户名
      * @param password 明文密码
      * @param email    用户邮箱
      * @param roles    对应的权限
      * @return
      */
-    User createUserWithRoles(String rootName, String password, String email, List<Role> roles);
+    User createUserWithRoles(String userName, String password, String email, List<Role> roles);
 
     /**
-     * 根据用户名查找User
+     * 根据用户id查找User
+     *
      *
      * @param userId User Id
      * @return
      */
     User findUserById(long userId);
+
+    /**
+     * 根据用户名查找User
+     *
+     * @param userName
+     * @return
+     */
+    User findUserByName(String userName);
+
+    /**
+     * 根据用户邮箱查找User
+     *
+     * @param email
+     * @return
+     */
+    User findUserByMail(String email);
+
+    /**
+     * 启用用户
+     *
+     * @param user
+     */
+    void enableUser(User user);
+
+    /**
+     * 创建相应权限的用户，默认开启状态
+     *
+     * @param userName
+     * @param password
+     * @param email
+     * @param roles
+     * @param invitationToken 邀请
+     */
+    User createUserWithRoles(String userName, String password, String email, List<Role> roles, String invitationToken);
+
+    /**
+     * 删除用户
+     *
+     * @param user
+     */
+    void deleteUser(User user);
+
+    /**
+     * 启用用户
+     *
+     * @param currentUser
+     * @param toEnableUser
+     */
+    void enableUser(User currentUser, User toEnableUser);
 }

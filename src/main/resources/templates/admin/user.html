@@ -1,0 +1,43 @@
+<!--
+  ~ Copyright 2019 Mi&Jack
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>添加用户</title>
+</head>
+<body>
+<!--<hr/>-->
+
+添加用户：直接在系统中生成User信息
+<form action="/api/user" method="post">
+    用户名：<input name="user-name"/> <br/>
+    email：<input name="user-email"/> <br/>
+    <button type="submit">提交</button>
+</form>
+
+<hr/>
+邀请用户：需要用户自主激活<br/>
+
+<form action="/api/user/invitation" method="post">
+    email：<input name="user-email"/> <br/>
+
+    <button type="submit">提交</button>
+</form>
+
+</body>
+</html>

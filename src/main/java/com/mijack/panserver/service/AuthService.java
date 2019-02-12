@@ -25,7 +25,21 @@ import java.util.Set;
  * @author Mi&Jack
  */
 public interface AuthService {
+    /**
+     * 根据token查找用户
+     *
+     * @param token token
+     * @return
+     */
     User findUserByToken(String token);
 
+    /**
+     * 根据用户信息创建restful token
+     *
+     * @param userId
+     * @param currentTimeMillis
+     * @param authorities
+     * @return
+     */
     String createRestfulToken(long userId, long currentTimeMillis, Set<Role> authorities);
 }

@@ -19,6 +19,7 @@ package com.mijack.panserver.web.security;
 import com.google.common.collect.Sets;
 import com.mijack.panserver.model.Role;
 import com.mijack.panserver.model.User;
+import com.mijack.panserver.web.security.restful.RestfulApiToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -69,5 +70,9 @@ public class AuthenticationUtils {
             return ((User) authentication.getPrincipal());
         }
         return null;
+    }
+
+    public static boolean isRestfulApi() {
+        return SecurityContextHolder.getContext().getAuthentication() instanceof RestfulApiToken;
     }
 }

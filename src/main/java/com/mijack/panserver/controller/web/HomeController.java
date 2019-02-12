@@ -16,12 +16,24 @@
 
 package com.mijack.panserver.controller.web;
 
+import com.mijack.panserver.model.User;
+import com.mijack.panserver.web.security.AuthenticationUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author Mi&Jack
  */
 @Controller
 public class HomeController {
+
+    @GetMapping({"/", "index.html"})
+    public String index() {
+        User user = AuthenticationUtils.currentUser();
+        if (user == null) {
+            return "index";
+        }
+        return "user/home";
+    }
 
 }

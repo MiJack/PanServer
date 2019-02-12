@@ -18,6 +18,7 @@ package com.mijack.panserver.event;
 
 import com.google.common.collect.Lists;
 import com.mijack.panserver.model.Role;
+import com.mijack.panserver.model.User;
 import com.mijack.panserver.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +57,8 @@ public class ApplicationStartupListener implements ApplicationListener<Applicati
         }
         logger.info("系统尚未初始化，开始初始化");
         userService.deleteAllUser();
-        userService.createUserWithRoles(rootName, email, password, Lists.newArrayList(Role.ROOT));
+        User root = userService.createUserWithRoles(rootName, email, password, Lists.newArrayList(Role.ROOT));
+        userService.enableUser(root);
         logger.info("系统初始化完成");
         applicationContext.publishEvent(new WebInitEvent(WebInitEvent.WebStatus.INITIALIZED));
     }
